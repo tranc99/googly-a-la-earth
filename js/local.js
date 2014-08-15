@@ -14,3 +14,5 @@ function initCB(instance) {
 function failureCB(errorCode) {
     alert("failed with error code" + errorCode.toString());
 }
+
+google.setOnLoadCallback(init);
