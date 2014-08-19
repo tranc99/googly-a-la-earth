@@ -1,17 +1,25 @@
 alert("initializing our app...")
-google.load("earth", "1", {"other_params": "sensor={true}"});
+google.load("earth", "1", {"other_params": "sensor={false}"});
 
 var ge;
 
-//add databases
-function addDatabase(db, username, password) {
-    console.log("INFO: Adding database: " + db);
-    google.earth.createInstance('map3d', initCB, failureCB, {
-            database: "http://khmdb.google.com/?db=" + db,
-            username: username,
-            password: password,
-    });
+/*function createPlacemarks() {
+    var placemark = ge.createPlacemark('');
+
+    var point = ge.createPoint('');
+    point.setLatitude(12.345);
+    point.setLongitude(54.321);
+    placemark.setGeometry(point);
+
+    ge.getFeatures().appendChild(placemark);
+}*/
+
+function failureCB(errorCode) {
+    alert("failed with error code" + errorCode.toString());
 }
+
+//functions to build the controls
+
 
 function init() {
     console.log("init.d");
@@ -20,54 +28,30 @@ function init() {
 
 function initCB(instance) {
     ge = instance;
+    //createPlacemarks();
     ge.getWindow().setVisibility(true);
-	placemarks();	
-	//createPlacemark();
-}
 
-function createPlacemark() {
+        // Create the placemark.
     var placemark = ge.createPlacemark('');
-    placemark.setName("placemark");
-    ge.getFeatures().appendChild(placemark);
-  
-    // Create style map for placemark
+    placemark.setName("AT&T");
+
+    //define a custom icon
     var icon = ge.createIcon('');
     icon.setHref('http://maps.google.com/mapfiles/kml/paddle/red-circle.png');
-    var style = ge.createStyle('');
-    style.getIconStyle().setIcon(icon);
-    placemark.setStyleSelector(style);
-    
-    // Create point
-    var la = ge.getView().copyAsLookAt(ge.ALTITUDE_RELATIVE_TO_GROUND);
+    var style = ge.createStyle(''); //create a new style
+    style.getIconStyle().setIcon(icon); //apply the icon to the style
+    style.getIconStyle().setScale(5.0);
+    placemark.setStyleSelector(style); //apply the style to the placemark
+
+    // Set the placemark's location.  
     var point = ge.createPoint('');
-    point.setLatitude(la.getLatitude());
-    point.setLongitude(la.getLongitude());
+    point.setLatitude(12.345);
+    point.setLongitude(54.321);
     placemark.setGeometry(point);
-  
-    //counter++;
-  }
-  
 
-function failureCB(errorCode) {
-    alert("failed with error code" + errorCode.toString());
-}
+    // Add the placemark to Earth.
+    ge.getFeatures().appendChild(placemark);
 
-//functions to build the controls
-
-function placemarks() {
-	console.log("placemarks");
-	//create a placemark
-	var placemark = ge.createPlacemark('');
-	placemark.setName("placemark");
-	
-	//locate the placemark
-	var point = ge.createPoint('');
-	point.setLatitude(12.345);
-	point.setLongitude(54.321);
-	placemark.setGeometry(point);
-	
-	//add the placemark
-	ge.getFeatures().appendChild(placemark);
 }
 
 
