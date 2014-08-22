@@ -17,7 +17,13 @@ function init() {
 
 function initCB(instance) {
     ge = instance;
-    ge.getSun().setVisibility(true);
+
+    //set sun visibility
+    //ge.getSun().setVisibility(true);
+
+    //set 3DBuilding visibility
+    ge.getLayerRoot().enableLayerById(ge.LAYER_BUILDINGS, true);
+
     ge.getWindow().setVisibility(true);
     ge.getNavigationControl().setVisibility(ge.VISIBILITY_SHOW);
 
