@@ -40,6 +40,19 @@ function initCB(instance) {
 
     // Add the GroundOverlay to Earth.
     ge.getFeatures().appendChild(groundOverlay);
+
+    for (i = 0; i < 20000; i++) {
+        console.log('z');
+    }
+
+    //create At&T stadium lookAt  Location: California, United States
+    //Latitude & Longitude: 37.778496, -122.388931 ref: http://www.satellitesights.com/satelliteimage/ATT_Park_California_United_States
+    var attLookAt =  ge.createLookAt('');
+
+    //set the location
+    attLookAt.setLatitude(37.778496);
+
+
 }
 
 
