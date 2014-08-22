@@ -17,43 +17,41 @@ function init() {
 
 function initCB(instance) {
     ge = instance;
-    //createPlacemarks();
     ge.getWindow().setVisibility(true);
+    ge.getNavigationControl().setVisibility(ge.VISIBILITY_SHOW);
 
-        // Create the placemark.
-    var placemark = ge.createPlacemark('');
-    placemark.setName("AT&T");
+    var la = ge.createLookAt('');
+    la.set(48.761, -121.794, 0, ge.ALTITUDE_RELATIVE_TO_GROUND, -8.541, 66.213, 20000);
+    ge.getView().setAbstractView(la);
 
-    //create a style map
-    var styleMap = ge.createStyleMap('');
+    // Create the placemark.
+    var lineStringPlacemark = ge.createPlacemark('');
 
-    //create normal style for the style map
-    var normalStyle = ge.createStyle('');
-    var normalIcon = ge.createIcon('');
-    normalIcon.setHref('http://maps.google.com/mapfiles/kml/paddle/red-circle.png');
-    normalStyle.getIconStyle().setIcon(normalIcon);
+    // Create the LineString; set it to extend down to the ground
+    // and set the altitude mode.
+    var lineString = ge.createLineString('');
+    lineStringPlacemark.setGeometry(lineString);
+    lineString.setExtrude(true);
+    lineString.setAltitudeMode(ge.ALTITUDE_RELATIVE_TO_GROUND);
 
-    //create highlight style for style map
-    var highlightStyle = ge.createStyle('');
-    var highlightIcon = ge.createIcon('');
-    highlightIcon.setHref('http://google-maps-icons.googlecode.com/files/girlfriend.png');
-    highlightStyle.getIconStyle().setIcon(highlightIcon);
-    highlightStyle.getIconStyle().setScale(5.0);
+    // Add LineString points.
+    lineString.getCoordinates().pushLatLngAlt(48.754, -121.835, 700);
+    lineString.getCoordinates().pushLatLngAlt(48.764, -121.828, 700);
+    lineString.getCoordinates().pushLatLngAlt(48.776, -121.818, 700);
+    lineString.getCoordinates().pushLatLngAlt(48.787, -121.794, 700);
+    lineString.getCoordinates().pushLatLngAlt(48.781, -121.778, 700);
+    lineString.getCoordinates().pushLatLngAlt(48.771, -121.766, 700);
+    lineString.getCoordinates().pushLatLngAlt(48.757, -121.768, 700);
+    lineString.getCoordinates().pushLatLngAlt(48.747, -121.773, 700);
 
-    styleMap.setNormalStyle(normalStyle);
-    styleMap.setHighlightStyle(highlightStyle);
+    // Create a style and set width and color of line.
+    lineStringPlacemark.setStyleSelector(ge.createStyle(''));
+    var lineStyle = lineStringPlacemark.getStyleSelector().getLineStyle();
+    lineStyle.setWidth(5);
+    lineStyle.getColor().set('9900ffff');  // aabbggrr format
 
-    //apply styleMap to a placemark
-    placemark.setStyleSelector(styleMap);
-
-    // Set the placemark's location.  
-    var point = ge.createPoint('');
-    point.setLatitude(12.345);
-    point.setLongitude(54.321);
-    placemark.setGeometry(point);
-
-    // Add the placemark to Earth.
-    ge.getFeatures().appendChild(placemark);
+    // Add the feature to Earth.
+    ge.getFeatures().appendChild(lineStringPlacemark);    
 
 }
 
