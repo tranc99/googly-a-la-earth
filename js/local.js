@@ -51,8 +51,10 @@ function initCB(instance) {
 
     //set the location
     attLookAt.setLatitude(37.778496);
+    attLookAt.setLongitude(-121.754322);
 
-
+    //Update the view in Google Earth
+    ge.getView().setAbstractView(attLookAt);
 }
 
 
