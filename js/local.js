@@ -19,7 +19,7 @@ function initCB(instance) {
     ge = instance;
 
     //set sun visibility
-    //ge.getSun().setVisibility(true);
+    ge.getSun().setVisibility(true);
 
     //set 3DBuilding visibility
     ge.getLayerRoot().enableLayerById(ge.LAYER_BUILDINGS, true);
@@ -28,12 +28,12 @@ function initCB(instance) {
     ge.getWindow().setVisibility(true);
     ge.getNavigationControl().setVisibility(ge.VISIBILITY_SHOW);
 
-    var la = ge.createLookAt('');
+    //var la = ge.createLookAt('');
     //default view
     //la.set(48.761, -121.794, 0, ge.ALTITUDE_RELATIVE_TO_GROUND, -8.541, 66.213, 20000);
-    //view AT&T instead
-    la.set(37.778611, -122.389167, 0, ge.ALTITUDE_RELATIVE_TO_GROUND, -8.541, 66.213, 20000);
-    ge.getView().setAbstractView(la);
+    //view AT&T instead, great success ya
+    //la.set(37.778611, -122.389167, 0, ge.ALTITUDE_RELATIVE_TO_GROUND, -8.541, 66.213, 20000);
+    //ge.getView().setAbstractView(la);
 
     // Create the GroundOverlay.
     var groundOverlay = ge.createGroundOverlay('');
@@ -45,7 +45,7 @@ function initCB(instance) {
 
     // Specify the geographic location.
     var latLonBox = ge.createLatLonBox('');
-    latLonBox.setBox(48.80, 48.75, -121.77, -121.85, 0);
+    latLonBox.setBox(37.778496, 37.779, -122.389167, -122.390, 0);
     groundOverlay.setLatLonBox(latLonBox);
 
     // Add the GroundOverlay to Earth.
