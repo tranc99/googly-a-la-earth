@@ -23,12 +23,16 @@ function initCB(instance) {
 
     //set 3DBuilding visibility
     ge.getLayerRoot().enableLayerById(ge.LAYER_BUILDINGS, true);
+    console.log("enabling LAYER_BUILDINGS");
 
     ge.getWindow().setVisibility(true);
     ge.getNavigationControl().setVisibility(ge.VISIBILITY_SHOW);
 
     var la = ge.createLookAt('');
-    la.set(48.761, -121.794, 0, ge.ALTITUDE_RELATIVE_TO_GROUND, -8.541, 66.213, 20000);
+    //default view
+    //la.set(48.761, -121.794, 0, ge.ALTITUDE_RELATIVE_TO_GROUND, -8.541, 66.213, 20000);
+    //view AT&T instead
+    la.set(37.778611, -122.389167, 0, ge.ALTITUDE_RELATIVE_TO_GROUND, -8.541, 66.213, 20000);
     ge.getView().setAbstractView(la);
 
     // Create the GroundOverlay.
@@ -53,11 +57,12 @@ function initCB(instance) {
 
     //create At&T stadium lookAt  Location: California, United States
     //Latitude & Longitude: 37.778496, -122.388931 ref: http://www.satellitesights.com/satelliteimage/ATT_Park_California_United_States
+    // 37.778611; -122.389167
     var attLookAt =  ge.createLookAt('');
 
     //set the location
     attLookAt.setLatitude(37.778496);
-    attLookAt.setLongitude(-121.754322);
+    attLookAt.setLongitude(-122.389167);
 
     //Update the view in Google Earth
     ge.getView().setAbstractView(attLookAt);
